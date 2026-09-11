@@ -1,12 +1,15 @@
 import { useState } from 'react'
 import { useEffect } from 'react';
 import Formulario from './Componentes/Fomulario';
+import Table from './Componentes/Tabela';
+
 
 
 
 function App() {
 
   const [produto, setProduto]=useState({
+    codigo:'',
     nome:'',
     preco:'',
     descricao:'',
@@ -15,9 +18,6 @@ function App() {
   const [qtdItem, setQtdItem]=useState(0);
   const [mensagem, setMensagem]=useState('');
 
-  useEffect(()=>{
-    
-  },[{cadastrarProduto}]);
 
   function handleChange(evento){
     const{name, value}=evento.target;
@@ -27,17 +27,41 @@ function App() {
     }));   
   }
 
-  function cadastrarProduto(){
-    setQtdItem(()=>qtdItem+1);
-    setProduto(()=>({...listaProdutos,produto}));
+  function cadastrarProduto(evento){
+    
+    evento.preventDefault();
+
+    const codProduto=qtdItem+1;
+
+    const novoProduto={...produto, codigo:codProduto};
+
+    setQtdItem(codProduto);
+    setListaProdutos((listaAnterior)=>[...listaAnterior,novoProduto]);
+
+    setProduto(
+      {codigo:'',
+      nome:'',
+      preco:'',
+      descricao:'',
+    })
   }
+
+
+  function excluirProduto(id) {
+    setListaProdutos((listaAnterior) =>
+      listaAnterior.filter((produto) => produto.codigo != id)
+    );
+  }
+
+    
 
 
   return (
     <>
     <Formulario onSubmit={cadastrarProduto} onChange={handleChange} produto={produto}/>
-    
+    <br />
+    <Table listaProdutos={listaProdutos} onClick={excluirProduto}/>  
     </>
-  )
+  );
 }
 export default App;
