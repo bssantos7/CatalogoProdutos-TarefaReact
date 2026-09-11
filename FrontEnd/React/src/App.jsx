@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { useEffect } from 'react';
 import Formulario from './Componentes/Fomulario';
 import Table from './Componentes/Tabela';
+import Card from './Componentes/Card';
+
 
 
 
@@ -58,9 +60,35 @@ function App() {
 
   return (
     <>
-    <Formulario onSubmit={cadastrarProduto} onChange={handleChange} produto={produto}/>
+      <div className="container">
+        <div className="container text-center">
+          <div className="row">
+            <h1>Cadastro de Produtos</h1>
+          </div>
+          <div className="row">
+              <div className="col">
+                <Formulario onSubmit={cadastrarProduto} onChange={handleChange} produto={produto}/>
+              </div>
+              <div className="col">
+                <Table listaProdutos={listaProdutos} onClick={excluirProduto}/>
+              </div>
+          </div>
+          <div className="row">
+              <Card/>
+              <Card/>
+              <Card/>
+              <Card/>
+              <Card/>
+          </div>
+        </div>
+      </div>
+    
+    
+    
+    
     <br />
-    <Table listaProdutos={listaProdutos} onClick={excluirProduto}/>  
+    
+    
     </>
   );
 }
