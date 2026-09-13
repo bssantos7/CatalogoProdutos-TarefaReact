@@ -1,8 +1,8 @@
 import Botao from "./Botao"
 
-function Card({idCard, src, titulo, preco, descricao}){
+function Card({key,idCard, src, titulo, preco, descricao}){
     return(
-        <div idCard={idCard} className="card" style={{width: "18rem"}}>
+        <div key={key} idCard={idCard} className="card" style={{width: "18rem"}}>
             <img src={src} className="card-img-top" alt="Imagem do Produto"/>
             <div className="card-body">
                 <h5 className="card-title">{titulo}</h5>
