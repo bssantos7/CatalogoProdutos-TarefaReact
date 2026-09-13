@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import { useEffect } from 'react';
 import Formulario from './Componentes/Fomulario';
 import Table from './Componentes/Tabela';
-import Card from './Componentes/Card';
+import DashBoard from './Componentes/DashBoard';
 
 
 
@@ -15,6 +14,7 @@ function App() {
     nome:'',
     preco:'',
     descricao:'',
+    imagem:"https://placehold.co/600x400",
   });
   const [listaProdutos, setListaProdutos]=useState([]);
   const [qtdItem, setQtdItem]=useState(0);
@@ -45,6 +45,7 @@ function App() {
       nome:'',
       preco:'',
       descricao:'',
+      imagem:"https://placehold.co/600x400",
     })
   }
 
@@ -54,8 +55,6 @@ function App() {
       listaAnterior.filter((produto) => produto.codigo != id)
     );
   }
-
-    
 
 
   return (
@@ -74,21 +73,11 @@ function App() {
               </div>
           </div>
           <div className="row">
-              <Card/>
-              <Card/>
-              <Card/>
-              <Card/>
-              <Card/>
+             <DashBoard listaProdutos={listaProdutos}/>
           </div>
         </div>
       </div>
-    
-    
-    
-    
     <br />
-    
-    
     </>
   );
 }
