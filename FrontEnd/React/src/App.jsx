@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Formulario from './Componentes/Fomulario';
 import Table from './Componentes/Tabela';
 import DashBoard from './Componentes/DashBoard';
@@ -16,8 +16,15 @@ function App() {
     descricao:'',
     imagem:"https://placehold.co/600x400",
   });
-  const [listaProdutos, setListaProdutos]=useState([]);
+
+  const [listaProdutos, setListaProdutos]=useState(()=>{
+    const produtosSalvos = localStorage.getItem("storageProdutos");
+
+    return produtosSalvos?JSON.parse(produtosSalvos):[];
+  });
+
   const [qtdItem, setQtdItem]=useState(0);
+
   const [mensagem, setMensagem]=useState('');
 
 
@@ -56,11 +63,15 @@ function App() {
     );
   }
 
+  useEffect(()=>{
+    localStorage.setItem("storageProdutos",JSON.stringify(listaProdutos));
 
+  },[listaProdutos]);
+  
   return (
     <>
-      <div className="container">
-        <div className="container text-center">
+      <div>
+        <div className="container-sm">
           <div className="row">
             <h1>Cadastro de Produtos</h1>
           </div>
